@@ -3,31 +3,35 @@ function palindrome(str) {
    
   str  = str.toLowerCase();
   
-  str = str.replace( str, '[^a-z^0-9]', '');
   
-  var temp= str.split('');
+  var temp= [];
   
-  //temp = temp.filter(function(val){
+  temp = str.split('');
+  
+  
+  temp = temp.filter(function(val){
     
- //   if((val <= 'z' && val >= 'a') ||( val <= 9 && val >= 0) ){
+   if((val <= 'z' && val >= 'a') ||( val <= 9 && val >= 0) ){
       
- //    return val;
- //   }
- // });
+     return val;
+    }
+  });
   
- //  str= temp.join('');
+  str = temp.join('');
   
-  for(i = 0; i < str.length && temp[i] === temp[str.length - 1 - i]; i ++){
-    
-    
-  }
+  var tempReverse = temp ;
   
-  if ( i > str.length -1 ){
+  
+    tempReverse.reverse();    //BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  
+  return temp;
+  
+  if (tempReverse === temp) {
     
-    return true;
-  }
+    return temp;
+  } else
     
   return false;
 }
 
-palindrome("eye");
+palindrome("fpdspflfGTREW^$#Tretp43fsa");
