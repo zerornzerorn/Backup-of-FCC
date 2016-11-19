@@ -1,0 +1,14 @@
+function confirmEnding(str, target) {
+  // "Never give up and good luck will find you."
+  
+  if (target == str.substr(str.length - target.length, str.length)){
+    
+    return true;
+  }
+  
+  
+  // -- Falcor
+  return false;
+}
+
+confirmEnding("Bastian", "n");
