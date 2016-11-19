@@ -1,0 +1,42 @@
+function mutation(arr) {
+  
+  arr[0] = arr[0].toLowerCase();
+  arr[1] = arr[1].toLowerCase();
+  //degrade to lower case.
+  
+  var firstStr = arr[0].split('');
+  
+  var secondStr = arr[1].split('');
+  //put the two strings into two arrays. 
+  var count = 0;
+  // summary of elements equal.
+    
+  for ( var i = 0; i < secondStr.length; i ++){
+    
+    for (var j = 0; j < firstStr.length; j ++){
+      
+      if( firstStr[j] === secondStr[i]){
+        
+        //第二项字符串第一个字符和第一个字符串逐项比较，如果是一样的，计数器累加１，同时中断继续进行的比较，进行i++ 操作，找第二个元素。
+        
+        count++;
+        
+        break;
+      }
+      
+      else;
+      
+    }
+  
+  }
+    if (count === secondStr.length){
+      
+      return true;
+      
+      //若计数器与 第二项字符串长度相等，则认为第二项所有元素均可在第一项字符串中找到，返回true。
+    }
+    
+    else return false;
+}   // 返回false
+
+mutation(["hello", "hey"]);
