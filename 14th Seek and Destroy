@@ -1,0 +1,32 @@
+function destroyer(arr, item1, item2, item3) {
+  // Remove all the values
+  
+    
+   var changedArr = arr.filter(function(element){
+      
+      return element !== item1;
+   });
+                               
+      
+    arr = changedArr;
+  
+    changedArr = arr.filter(function(element){
+      
+      return element !== item2;
+   });
+                               
+      
+    arr = changedArr;
+  
+  changedArr = arr.filter(function(element){
+      
+      return element !== item3;
+   });
+                               
+      
+    arr = changedArr;
+
+  return arr;
+}
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
