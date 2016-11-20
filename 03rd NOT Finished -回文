@@ -8,10 +8,9 @@ function palindrome(str) {
   
   temp = str.split('');
   
-  
   temp = temp.filter(function(val){
     
-   if((val <= 'z' && val >= 'a') ||( val <= 9 && val >= 0) ){
+   if((val <= 'z' && val >= 'a') ||( val <= '9' && val >= '0') ){
       
      return val;
     }
@@ -19,19 +18,123 @@ function palindrome(str) {
   
   str = temp.join('');
   
-  var tempReverse = temp ;
+  var tempReverse = Array.from(temp);
   
   
-    tempReverse.reverse();    //BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    tempReverse.reverse();    
   
-  return temp;
+  var str1 = temp.join('');
   
-  if (tempReverse === temp) {
+  var str2 = tempReverse.join('');
+  
+  
+  if (str1==str2) {
     
-    return temp;
+    return true;
   } else
     
   return false;
 }
 
 palindrome("fpdspflfGTREW^$#Tretp43fsa");
+
+
+
+
+
+
+
+
+
+
+
+/* method 2
+
+function palindrome(str) {
+  // Good luck!
+   
+  str  = str.toLowerCase();
+  
+  var temp1 = [];
+  var temp2 = [];
+  
+  temp1 = str.split('');
+  
+  temp1 = temp1.filter(function(val){
+    
+   if((val <= 'z' && val >= 'a') ||( val <= '9' && val >= '0') ){
+      
+     return val;
+    }
+  });
+  
+  for(var i = 0; i <temp1.length; i ++){
+    
+   temp2.push(temp1[temp1.length-i-1]);
+  }
+  
+  
+  var str1 = temp1.join('');
+  
+
+  
+  var str2 = temp2.join('');  
+  
+  if (str1 === str2) {
+    
+    return true;
+  } else
+    
+  return false;
+}
+
+palindrome("fpdspflfGTREW^$#Tr ,,fsd,, ,fds, ,f,sf,,ds, etp43fsa");
+
+
+*/  end of method 2
+
+
+
+
+/* method 3
+function palindrome(str) {
+  // Good luck!
+  
+  str = str.toLowerCase();
+  
+  var newStr = str.replace(/ /g, "");
+  
+  var arr = newStr.split('');
+  
+  var newArr=[];
+  
+  for( i = 0; i < arr.length; i ++){
+    
+    if (arr[i]>=0 && arr[i]<=9){
+      
+      newArr.push(arr[i]);
+      
+    } else if (arr[i]>='a' && arr[i]<='z'){
+      
+      newArr.push(arr[i]);
+      
+    }
+  }
+   
+  arr=newArr;
+  
+  for (j = 0; j < arr.length && arr[j] === arr[arr.length-j-1]; j++){      
+    
+  }
+    
+  if (j === arr.length){
+    
+    return true;
+  }
+  return false;
+  
+}
+
+palindrome("A man, a plan, a canal. Panama");
+
+*/
