@@ -1,0 +1,28 @@
+function rot13(str) { // LBH QVQ VG!
+  
+  
+  var arr= str.split('');
+  
+  for (i = 0; i < arr.length; i ++){
+    
+    if(arr[i]>="N" && arr[i]<= 'Z'){
+      
+      arr[i]= String.fromCharCode(arr[i].charCodeAt(0) - 13);
+      
+    } else if(arr[i]>="A" && arr[i]<= 'M'){
+      
+      arr[i] = String.fromCharCode(arr[i].charCodeAt(0) + 26 - 13);
+    }
+   
+    
+  }
+  
+ str=arr.join('');
+  
+  
+  
+  return str;
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");
