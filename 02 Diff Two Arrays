@@ -1,0 +1,42 @@
+function diff(arr1, arr2) {
+  var newArr = [];
+  
+    var arr1Sub1=[];
+    var arr1Sub2=[];
+    var arr2Sub1=[];
+    var arr2Sub2=[];
+  
+  for( var i = 0; i < arr1.length; i ++){
+    
+    for(var j = 0; j < arr2.length; j++){
+      
+      if (arr1[i] === arr2[j]){
+             
+          
+          arr1Sub1 = arr1.slice(0,i);
+          arr1Sub2 = arr1.slice(i);
+          arr1Sub2.shift();
+          arr1     = arr1Sub1.concat(arr1Sub2);
+          i --;
+        
+          
+          arr2Sub1 = arr2.slice(0,j);
+          arr2Sub2 = arr2.slice(j);
+          arr2Sub2.shift();
+          arr2     = arr2Sub1.concat(arr2Sub2);      
+          j --; 
+           
+        
+      }     
+    }    
+  }
+
+  newArr = arr1.concat(arr2);
+  
+    
+  
+  // Same, same; but different.
+  return newArr;
+}
+
+diff([1, 2, 3, 5], [1, 2, 3, 4, 5]);
