@@ -1,0 +1,16 @@
+function sumAll(arr) {
+  var min = Math.min(arr[0],arr[1]);
+  
+  var max = Math.max(arr[0],arr[1]);
+  var result=0;
+  
+  for( min; min <= max; min ++)
+    
+    {
+      result += min;
+    }
+  
+  return result;
+}
+
+sumAll([543, 424]);
