@@ -1,0 +1,87 @@
+function convert(num) {
+  
+  var array=[];
+  
+  var thousand=Math.floor(num/1000);    
+  var hundred = Math.floor((num%1000)/100);  
+  var ten =Math.floor( (num%100)/10);  
+  var digi =(num%10);  
+  
+
+  for (var i = 0 ; i < thousand; i ++){
+      array.push("M");
+    }
+    
+    
+  if(hundred >= 5){
+  
+    if (hundred > 8) {
+         array.push("CM");
+    
+    } else array.push("D");   
+    
+     for (var j = hundred ; j > 5; j --){
+      array.push("C");
+    }
+  }
+    
+  
+  
+  if (hundred === 4) {
+         array.push("CD");  
+     } else if (hundred < 4){
+       
+    for (var k = hundred ; k > 0; k --){
+         array.push("C");
+       }
+  
+     }
+  
+      if(ten >= 5){
+  
+        if (ten === 9) {
+         array.push("XC");
+    
+         } else array.push("L");   
+    
+        for (var l = ten ; l > 5; l --){
+           array.push("C");
+            }
+    
+      }
+      if (ten === 4) {
+           array.push("CL");
+  
+       } else if (ten < 4){
+         for (var m = ten ; m > 0; m --){
+         array.push("X");
+         }
+       }
+  
+  
+       if(digi >= 5){
+  
+        if (digi === 9) {
+         array.push("IX");
+    
+         } else array.push("V");   
+         
+    
+        for (var n = digi ; n > 5; n --){
+           array.push("I");
+            }
+        } else if (digi === 4) {
+           array.push("IV");  
+       } else if (digi < 4){
+         for (var p = digi ; p > 0; p --){
+         array.push("I");
+         }
+       }
+     
+  
+  var str = array.join('');
+  
+ return str;
+}
+
+convert(649);
