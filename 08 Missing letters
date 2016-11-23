@@ -14,18 +14,13 @@ function fearNotLetter(str) {
       
       lack= arrCode[j]+1;
       break;
-      
+      }
     }
-    
-    }
-    if (lack === 0){
-            
-     return "undefined";
-    } else{
-      
+    if (lack === 0){            
+     return undefined;
+    } else{      
       return String.fromCharCode(lack);
-    }
-    
+    }    
 }
 
 fearNotLetter("yz");
