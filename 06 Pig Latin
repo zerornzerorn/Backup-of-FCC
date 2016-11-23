@@ -1,0 +1,36 @@
+function translate(str) {
+  
+  var index=[];  
+  index.push(str.indexOf("a"));
+  index.push(str.indexOf("e"));
+  index.push(str.indexOf("i"));
+  index.push(str.indexOf("o"));
+  index.push(str.indexOf("u"));
+  
+  for (var i = 0; i < index.length; i ++){
+    
+    if(index[i]<0){
+      index[i]=99;
+    }
+   
+  }
+
+   var first= Math.min(index[0],index[1],index[2],index[3],index[4]);
+ 
+  if (first === 0){
+    
+    str += "way";
+    
+  }else{ 
+  
+  var str1 = str.substr(0,first);
+  
+  str = str.slice(first) + str1 + "ay";
+  
+  
+  }
+  
+  return str;
+}
+
+translate("consonant");
