@@ -1,0 +1,31 @@
+function fearNotLetter(str) {
+  
+  var arr=str.split('');
+  var lack=0;
+  var arrCode=[];
+  for(var i = 0; i < arr.length; i ++){
+    
+    arrCode.push(arr[i].charCodeAt());
+    }
+  
+  for(var j = 0; j < arrCode.length-1; j ++){
+    
+    if(arrCode[j+1] - arrCode[j]  !== 1){
+      
+      lack= arrCode[j]+1;
+      break;
+      
+    }
+    
+    }
+    if (lack === 0){
+            
+     return "undefined";
+    } else{
+      
+      return String.fromCharCode(lack);
+    }
+    
+}
+
+fearNotLetter("yz");
