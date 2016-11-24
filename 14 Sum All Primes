@@ -1,0 +1,35 @@
+function sumPrimes(num) {
+  
+  var arr=[2];
+  
+  for( var i = 3; i <= num; i ++){
+    
+    arr.push(i);
+    
+  }
+  
+  var primeArr=[2,3];
+  
+  for( i = 2; i<num-1; i++){
+    
+    for(var j = 0; j < i; j ++){
+      
+      if( arr[i]%arr[j] === 0){
+        
+        break;
+      }
+    } 
+    
+    if(j===i){ primeArr.push(arr[i]);}
+    
+    
+  }
+  
+  
+  return primeArr.reduce(function(preVal, currVal){
+    
+    return preVal+currVal;});
+  
+}
+
+sumPrimes(111114);
