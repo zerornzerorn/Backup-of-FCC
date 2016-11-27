@@ -1,0 +1,31 @@
+function steamroller(arr) {
+  // I'm a steamroller, baby
+  
+  var arr1=[];
+  
+  
+  function check(arr){
+    
+    for(var i = 0; i < arr.length; i ++){  
+  
+    
+    if (Array.isArray(arr[i])){      
+      
+      check(arr[i]);  
+      
+    }else{
+      
+     arr1.push(arr[i]);
+    
+      }
+    
+    }
+   
+  }
+  
+  check(arr);
+  
+  return arr1;
+}
+
+steamroller([1, [2], [3, [[4]]]]);
