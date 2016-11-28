@@ -1,0 +1,26 @@
+function add() {
+  var a= arguments[0];
+  var b= arguments[1];
+  
+  if(typeof(a)!=='number'){
+      
+      return undefined;
+    }
+  
+   else if(!b){
+     return function(y){
+       if(typeof(y)!=='number'){         
+         return undefined;
+       } else return a+y;
+   };
+
+ }   
+    else if(typeof(b)!=='number'){
+      return undefined;      
+    }
+   else {       
+    return a+b;
+    }
+ 
+}
+add('ab');
