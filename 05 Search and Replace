@@ -26,3 +26,32 @@ function myReplace(str, before, after) {
 }
 
 myReplace("He is Sleeping on the couch", "Sleeping", "sitting") ;
+
+
+//new method with String.replace;
+
+function myReplace(str, before, after) {
+    // check capitalized letter
+  var arrBefore= before.split('');
+  var arrAfter= after.split('');
+  
+  if(arrBefore[0]<='z' && arrBefore[0]>='a'){
+
+     arrAfter[0] = arrAfter[0].toLowerCase();
+  }else{
+
+    arrAfter[0] = arrAfter[0].toUpperCase();
+  }
+
+  after=arrAfter.join('');
+
+  //find and replace
+  
+ str=str.replace(before, after);
+  
+  return str;
+}
+
+myReplace("He is Sleeping on the couch", "Sleeping", "sitting") ;
+
+
