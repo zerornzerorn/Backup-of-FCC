@@ -23,10 +23,36 @@ function spinalCase(str) {
      str=str.toLowerCase(); 
     
     }
-  
-
-  
-  return str;
+    return str;
 }
 
 spinalCase("Teletubbies say Eh-oh");
+
+
+//new method with RegExp function;
+
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David St. Hubbins
+  
+  function change(match){
+    
+    return "-"+ match.toLowerCase();
+  }
+  
+  if(str.match(/[^A-Za-z0-9]/g)){
+                    
+     str=str.replace(/[^A-Za-z0-9]/g, "-");
+  
+     str=str.toLowerCase();          
+   }else {
+     
+    
+   str=str.replace(/[A-Z]/g, change);
+ }
+  
+  return str;
+  
+
+}
+spinalCase("thisIsSpinalTap") ;
