@@ -1,0 +1,64 @@
+function sym(args) {
+  
+var common=0;
+  // sorting all arguments
+for(var i = 0; i < arguments.length-1; i ++){  
+  arguments[i].sort(function(a,b){
+    return a-b;    
+  });  
+}
+  
+ //delete all repeatings 
+  
+for( i = 0; i < arguments.length; i ++){  
+  for(var j = 0 ; j < arguments[i].length-1; j ++){    
+    if(arguments[i][j]===arguments[i][j+1]){      
+      arguments[i].splice(j,1);      
+      j--;      
+    }    
+  }   
+}
+  
+  // to form a new array including all arguments, to perform the reduce;
+  var arr=[];
+  
+  for( i = 0; i < arguments.length; i ++){  
+    arr.push(arguments[i]);
+  }
+
+  
+  
+  // use reduce to perform all the merge, below is the Intermediate Algorithm 
+  
+  var result= arr.reduce(function(arr1,arr2){
+    var arr1Sub1=[];
+    var arr1Sub2=[];
+    var arr2Sub1=[];
+    var arr2Sub2=[];  
+  for( var i = 0; i < arr2.length; i ++){    
+    var j = arr1.indexOf(arr2[i]);    
+    if(j>=0){
+          arr1Sub1 = arr1.slice(0,j);
+          arr1Sub2 = arr1.slice(j);
+          arr1Sub2.shift();
+          arr1     = arr1Sub1.concat(arr1Sub2);
+
+          arr2Sub1 = arr2.slice(0,i);
+          arr2Sub2 = arr2.slice(i);
+          arr2Sub2.shift();
+          arr2     = arr2Sub1.concat(arr2Sub2);      
+          i --;                
+      }     
+    }    
+  return arr1.concat(arr2);
+    
+  });
+  
+  
+  // final result;
+  
+  
+  return result;
+}
+
+sym([1, 2, 5, 1], [2, 2, 3, 5], [3, 4, 5, 5]) ;
