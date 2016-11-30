@@ -30,3 +30,22 @@ function destroyer(arr, item1, item2, item3) {
 }
 
 destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+
+
+//new method, to learn
+
+
+function destroyer(arr) {
+  // Remove all the values
+  var aarr=[];
+  for(var i=0;i<arguments.length;i++)
+    
+    aarr[i]=arguments[i];
+
+  return aarr[0].filter(function(a){
+    return aarr.slice(1,aarr.length).indexOf(a)==-1;    
+  });
+}
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
