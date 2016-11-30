@@ -1,0 +1,82 @@
+function telephoneCheck(str) {
+
+  var str1=str.match(/\d+/g).join('');  
+  var a,b,c,d,e;
+  
+  function set(){    
+  a = str.match(/^\d{3}-\d{3}-\d{4}/);
+  b = str.match(/^\d{3}\s\d{3}\s\d{4}/);
+  c = str.match(/^\(\d{3}\)\d{3}-\d{4}/);
+  d = str.match(/^\(\d{3}\)\s\d{3}-\d{4}/);
+  e = str.match(/^\d{10}/);
+  }
+  
+  if(str1.length===10 ){    
+      set();    
+      if(a||b||c||d||e){     
+        return true;
+ 
+     }else return false;   
+   }
+
+  else if(str1.length===11){    
+    if(str.match(/^[1]/)){      
+      str=str.replace(/^[1]/, "");
+      str=str.replace(/^\s/, "");
+      set();      
+      
+      if(a||b||c||d||e){     
+        return true;    
+      }  else return false;
+    }else return false;       
+  }
+      
+  // Good luck!
+  else return false;
+}
+
+telephoneCheck("1 (555) 555-5555");
+
+
+
+// another method different on the RegExp
+
+
+function telephoneCheck(str) {
+
+  var str1=str.match(/\d+/g).join('');  
+  var a,b,c,d,e;
+  
+  function set(){    
+  a = str.match(/^\d\d\d-\d\d\d-\d\d\d\d/);
+  b = str.match(/^\d\d\d\s\d\d\d\s\d\d\d\d/);
+  c = str.match(/^\(\d\d\d\)\d\d\d-\d\d\d\d/);
+  d = str.match(/^\(\d\d\d\)\s\d\d\d-\d\d\d\d/);
+  e = str.match(/^\d\d\d\d\d\d\d\d\d\d/);
+  }
+  
+  if(str1.length===10 ){    
+    set();    
+      if(a||b||c||d||e){     
+        return true;
+ 
+     }else return false;   
+   }
+
+  else if(str1.length===11){    
+    if(str.match(/^[1]/)){      
+      str=str.replace(/^[1]/, "");
+      str=str.replace(/^\s/, "");
+      set();      
+      
+      if(a||b||c||d||e){     
+        return true;    
+      }  else return false;
+    }else return false;       
+  }
+      
+  // Good luck!
+  else return false;
+}
+
+telephoneCheck("1 (555) 555-5555");
