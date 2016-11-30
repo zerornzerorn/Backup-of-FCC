@@ -1,0 +1,200 @@
+function checkCashRegister(price, cash, cid) {
+  var moneySys=[10000,2000,1000,500,100,25,10,5,1]
+  
+  var change=[];
+  var change1=cash-price;
+  var total;
+  var penny, nickel, dime, quarter, one, five, ten, twenty, hundred;
+  var min=0.00;
+  
+  function surplus(){
+    total=0.00;
+    for(var i = 0 ; i < cid.length; i ++){
+    total += cid[i][1]*100;
+   }
+  total /= 100;  
+  }  
+  surplus();
+    
+    if(Math.floor(change1/100)){        
+      hundred = Math.floor(change1/100)*100;
+      min=Math.min(hundred,cid[8][1]);
+      change1= change1-min;      
+      change.push(["ONE HUNDRED", min]);
+      cid[8][1] -= min;      
+    }
+  
+    if(Math.floor(change1/20)){        
+      twenty = Math.floor(change1/20)*20;
+      min=Math.min(twenty,cid[7][1]);
+      change1= change1-min;    
+      change1= change1.toFixed(2);
+      if(min) 
+        change.push(["TWENTY", min]);
+      cid[7][1] -= min;
+      
+    }
+  
+    if(Math.floor(change1/10)){        
+      ten = Math.floor(change1/10)*10;
+      min=Math.min(ten,cid[6][1]);
+      change1= change1-min; 
+      change1= change1.toFixed(2);
+      if(min) 
+        change.push(["TEN", min]);
+      cid[6][1] -= ten;
+    }
+      
+    if(Math.floor(change1/5)){        
+      five = Math.floor(change1/5)*5;
+      min=Math.min(five,cid[5][1]);
+      change1= change1-min;      
+      change1= change1.toFixed(2);
+      if(min) 
+        change.push(["FIVE", min]);
+      cid[5][1] -= min;
+    }
+  
+    if(Math.floor(change1/1)){        
+      one = Math.floor(change1/1);
+      min=Math.min(one,cid[4][1]);
+      change1= change1-min;      
+      change1= change1.toFixed(2);
+      if(min) 
+        change.push(["ONE", min]);
+      cid[4][1] -= min;
+    }
+      
+    if(Math.floor(change1*4)){        
+      quarter = Math.floor(change1*4)*0.25;
+      min=Math.min(quarter,cid[3][1]);
+      change1= change1-min;      
+      change1= change1.toFixed(2);
+      if(min)  
+        change.push(["QUARTER", min]);
+      cid[3][1] -= min;
+    }
+  
+    if(Math.floor(change1*100/10)){  
+      
+      dime = Math.floor(change1*10)*0.1;
+      min=Math.min(dime,cid[2][1]);
+      change1 = change1-min;   
+      change1= change1.toFixed(2);
+      if(min)    
+        change.push(["DIME", min]);
+      cid[2][1] -= min;
+    }
+  
+    if(Math.floor(change1*20)){        
+      nickel = Math.floor(change1*20)*0.05;
+      min=Math.min(nickel,cid[1][1]);
+      change1 = change1-min;   
+      change1= change1.toFixed(2);
+      if(min)    
+        change.push(["NICKEL", min]);
+      cid[1][1] -= min;
+    }
+     
+    if(Math.floor(change1*100/1)){        
+      penny = Math.floor(change1*100/1)*0.01;
+      min=Math.min(penny,cid[0][1]);
+      change1 = change1-min;   
+      change1= change1.toFixed(2);
+      if(min)    
+        change.push(["PENNY", min]);
+      cid[0][1] -= min;
+    }
+
+  surplus();
+  
+
+  if (change1 > 0.01)
+    
+    return "Insufficient Funds";
+
+  else if( total===0){
+    
+    return 'Closed';
+  }
+  else 
+ 
+  // Here is your change, ma'am.
+  return change;
+}
+
+// Example cash-in-drawer array:
+// [["PENNY", 1.01],
+// ["NICKEL", 2.05],
+// ["DIME", 3.10],
+// ["QUARTER", 4.25],
+// ["ONE", 90.00],
+// ["FIVE", 55.00],
+// ["TEN", 20.00],
+// ["TWENTY", 60.00],
+// ["ONE HUNDRED", 100.00]]
+
+checkCashRegister(3.26, 100.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function checkCashRegister(price, cash, cid) {
+  var moneyNumber=[100, 20, 10, 5, 1, 0.25, 0.10, 0.05, 0.01];  
+  var moneyLetter=["ONE HUNDRED", "TWENTY", "TEN", "FIVE", "ONE", "QUARTER", "DIME", "NICKEL", "PENNY"];  
+  var change=[];  //array of change
+  var change1=cash-price; // total change
+  var total;             //surplus total
+  var min=0.00;          // interm variation
+
+  //function to calc surplus
+  function surplus(){
+    total=0.00;
+    for(var j = 0 ; j < cid.length; j ++){
+    total += cid[j][1]*100;
+   }
+  total /= 100;  
+  }    
+  for(var i = 0; i < cid.length; i ++){    
+      min=Math.min(Math.floor(change1/moneyNumber[i])*moneyNumber[i],cid[8-i][1]);
+      change1= change1-min;   
+      change1= change1.toFixed(2);
+      if(min)
+        change.push([moneyLetter[i], min]);
+      cid[8-i][1] -= min;        
+  }
+  
+  surplus();
+
+  if (change1 > 0)    
+    return "Insufficient Funds";
+  else if( total===0){    
+    return 'Closed';
+  }
+  else  
+  // Here is your change, ma'am.
+  return change;
+}
+
+// Example cash-in-drawer array:
+// [["PENNY", 1.01],
+// ["NICKEL", 2.05],
+// ["DIME", 3.10],
+// ["QUARTER", 4.25],
+// ["ONE", 90.00],
+// ["FIVE", 55.00],
+// ["TEN", 20.00],
+// ["TWENTY", 60.00],
+// ["ONE HUNDRED", 100.00]]
+
+checkCashRegister(3.26, 100.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]) ;
