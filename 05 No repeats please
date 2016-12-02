@@ -1,6 +1,6 @@
 function permAlone(str) {
   
-  var ele1=[],ele2=[]; //ele1 存储所有的， 哪些字母重复，重复字母的数量。ele2 临时存储哪个字母重复，数量，并推送到ele1中去。
+  var ele1=[],ele2=[]; //ele1 存储所有的， 哪些字母重复，重复字母的数量。ele2 临时存储具体一个，哪个字母重复，数量
   var num = 1;  //字母的个数，初值为1。
   var val=0;    //最终结果
   var length=str.length;//字符串长度
@@ -23,32 +23,31 @@ function permAlone(str) {
   
 
   
-    for(var i = 0; i < arr.length-1; i ++){// 统计所有字母重复数量，哪些重复的功能块。
+    for(var i = 0; i < arr.length-1; i ++){// 统计所有字母重复数量，哪些重复的功能。
       
-       if(arr[i]===arr[i+1]){
+       if(arr[i]===arr[i+1]){ // 如果发现有重复字母
        
-         ele2.push(arr[i]);
+         ele2.push(arr[i]);        // 推送重复字母到ele2
       
-         while (arr[i]===arr[i+1]) {
+         while (arr[i]===arr[i+1]) { //如果有重复就执行循环，循环判断同一字母一共多少个重复
         
-           arr.splice(i,1);
-           num += 1;  
+           arr.splice(i,1);        //从i位删除一个重复字母，arr总长度会减掉1，两个重复字母去掉前面的那个
+           num += 1;               //计数器加一
          }
-         ele2.push(num);
-         num=1;
-         i--;
-         ele1.push(ele2);
-         ele2=[];         
+         ele2.push(num);           //计数器推送到ele2
+         num=1;                    //重设num为1；
+         i--;                      //计数器往前移一位，因为删除 一个或多个重复字母，i指向的元素已经被删除，
+                                   // 新元素代替旧元素来到了i指向位置，为了确保新元素能够被遍历，必须先进行--
+         ele1.push(ele2);          //把统计完的结果推送到ele1中。
+         ele2=[];                  //退送完重新设定ele2为空；
        }
     }
   
   //计算所有重复字母的总数
-  num=0;
- for(i = 0; i < ele1.length; i ++){
-    
-    num += ele1[i][1];    
-    
-  }
+  num=0;                            //重新利用num变量，为所有重复字母的总和
+ for(i = 0; i < ele1.length; i ++){    
+    num += ele1[i][1];        
+ }
   
   //计算所有重复字母的可能排布
   
@@ -72,9 +71,9 @@ function permAlone(str) {
  if(ele1.length>1)
   val = val+fac(arr.length)*surplus*(ele1.length-1);
   
+  //返回最终结果；
   return val;
     
-  
 }
 
 
