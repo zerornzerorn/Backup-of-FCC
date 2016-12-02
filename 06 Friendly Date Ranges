@@ -1,0 +1,178 @@
+function makeFriendlyDates(arr) {
+  
+  //将数字月份转换为字母月份；
+   function turnMonth(month){                    
+      switch(month){
+        case 1:
+          return 'January';
+        case 2:
+          return 'February';
+        case 3:
+          return 'March';
+        case 4:
+          return 'April';
+        case 5:
+          return 'May';
+        case 6:
+          return 'June';
+        case 7:
+          return 'July';
+        case 8:
+          return 'August';
+        case 9:
+          return 'September';
+        case 10:
+          return 'October';
+        case 11:
+          return 'Novernber';
+        case 12:
+          return 'December';     
+      }
+  }
+ //将特殊数字日期变为数字+字母日期；其他日期后面加-th；以便节省代码数量。
+  function turnDate(date){                      
+      switch(date){
+        case 1:
+          return '1st';
+        case 2:
+          return '2nd';
+        case 3:
+          return '3rd';
+        case 21:
+          return '21st';
+        case 22:
+          return '22nd';
+        case 23:
+          return '23rd';
+        case 31:
+          return '31st';           
+      }
+  }
+    
+  //变量设置区；
+  
+  var ymdStr1,ymdStr2;                     //用来存储转化后的第一个日期与第二个日期字符串
+  
+  var diff1,diff2;                         //两个日期间的差值；用来判断是否一年内。
+                                           //diff1用来判断年份相差的情况，相差一个年份以上比较月份和日期，否则不比较。
+                                           //来避免同年内月份不相等导致的dff2算出来的结果显示不在一年内的错误。
+  
+  var ymdArr1 = arr[0].split('-');         //导出第一个日期，并以数组形式分别存放年、月、日
+  var ymdArr2 = arr[1].split('-');         //导出第二个日期，并以数组形式分别存放年、月、日
+    
+  diff1=parseInt(ymdArr2[0],10)-parseInt(ymdArr1[0],10);// 先比较年份
+  if(diff1>0)                              //只有diff1大于1的情况下才比较月份和日期。
+  diff2=parseInt(ymdArr2[0],10)-parseInt(ymdArr1[0],10) + parseInt(ymdArr2[1],10)-parseInt(ymdArr1[1],10)+ parseInt(ymdArr2[2],10) - parseInt(ymdArr1[2],10);
+   //               两个年份相减                                 两个月份相减                               两个日期相减； 这个数大于0，说明不是一年内； 
+  
+  arr=[];                                 //由于arr的数据已经导入到数组中，所以清空arr，以便推送新格式的日期进去。
+  
+  
+  
+  
+  //数字月份、数字日期转为字母表达形式。调用这个函数后，实现转换。
+  function transfer(){                    
+    
+  if (turnDate(parseInt(ymdArr1[2],10)))                    //parseInt 第一个数组的日期，转换为十进制数字；并调动turnDate函数，校验是否特殊日期格式
+    ymdArr1[2] = turnDate(parseInt(ymdArr1[2],10));         //如果是特殊日期，调用函数，转化为特殊日期数字+字母表达形式；
+  else {                                                    //如果不是特殊日期
+    if (ymdArr1[2].substr(0,1)=='0')                        //判断日期是否以零开头
+    {
+      ymdArr1[2] = ymdArr1[2].substr(1,2);                  //如果以零开头，则日期只取没有第二位；？？？？repalce功能为什么不行？？？？
+    }      
+    ymdArr1[2] += "th";                                     //日期后面加th；
+  }
+      
+    
+  if (turnDate(parseInt(ymdArr2[2],10)))                     //与上面相同。
+    ymdArr2[2] = turnDate(parseInt(ymdArr2[2],10));
+  
+  else {
+    if (ymdArr2[2].substr(0,1)=='0')
+    {
+      ymdArr2[2] = ymdArr2[2].substr(1,2);
+    }      
+    ymdArr2[2] += "th";
+  }
+      
+    
+    ymdArr1[1]=turnMonth(parseInt(ymdArr1[1],10));           //调用turnMonth函数，将第一个日期的数字月份转化为字母月份。
+    ymdArr2[1]=turnMonth(parseInt(ymdArr2[1],10));           //调用turnMonth函数，将第一个日期的数字月份转化为字母月份。
+  }
+  
+  
+  //以下为主程序，首先判断是否一年内。
+  
+  
+   if(diff1>1||diff2>0){                                     //如果不是一年内，则两个日期都有年、月、日。
+     
+     transfer();                                             //调用转换函数
+
+     ymdStr1 = ymdArr1[1] + " " + ymdArr1[2] +', ' + ymdArr1[0];  //按照月-日-年的形式给第一个日期字符串赋值；
+     arr.push(ymdStr1);                                           //把第一个日期字符串推送到空的arr中去。
+    
+     ymdStr2 = ymdArr2[1] + " " + ymdArr2[2] +', ' + ymdArr2[0];  //按照月-日-年的形式给第二个日期字符串赋值；
+     arr.push(ymdStr2);                                           //把第一个日期字符串推送到空的arr中去。
+  }
+  
+  
+ else{                                                       //否则，就是是在一年内，一年内都会省略第二个日期的年份
+   
+   if(ymdArr1[0]==2016){                                     //年份为2016，省略第一个年份；
+         
+     transfer();
+     if(ymdArr1[1]===ymdArr2[1]){                               //如果月份相等，省略第二个月份；
+       
+       if(ymdArr1[2]===ymdArr2[2]){                                 //如果日期相等，省略第二个日期；
+         
+         ymdStr1 = ymdArr1[1] + " " + ymdArr1[2];                   //只推送第一个月份，日期（由于年份为2016，因此省略）
+         arr.push(ymdStr1);    
+       }
+       
+       else{                                                        //如果日期不相等，推送第二个日期。
+         ymdStr1 = ymdArr1[1] + " " + ymdArr1[2];            
+         arr.push(ymdStr1);    
+         ymdStr2 = ymdArr2[2];
+         arr.push(ymdStr2);         
+       }              
+     }     
+     else{                                                      //如果月份不相等，推送两个月份，日期。
+       ymdStr1 = ymdArr1[1] + " " + ymdArr1[2];
+       arr.push(ymdStr1);    
+       ymdStr2 = ymdArr2[1] + " " + ymdArr2[2];
+       arr.push(ymdStr2);
+     }
+     
+   }
+   
+   else{                                                     //年份不是2016，第一个日期需要加上第一个年份；
+     transfer();
+     if(ymdArr1[1]===ymdArr2[1] && ymdArr1[0]===ymdArr2[0]){   //如果月份相等，而且年份相等，省略第二个月份
+       
+       if(ymdArr1[2]===ymdArr2[2]){                               //如果日期相等，省略第二个日期。
+         
+         ymdStr1 = ymdArr1[1] + " " + ymdArr1[2] +', ' + ymdArr1[0];    
+         arr.push(ymdStr1);    
+       }
+       
+       else{                                                      //如果日期不相等，推送第二个日期；
+         ymdStr1 = ymdArr1[1] + " " + ymdArr1[2]+', ' + ymdArr1[0];            
+         arr.push(ymdStr1);    
+         ymdStr2 = ymdArr2[2];
+         arr.push(ymdStr2);         
+       }              
+     }     
+     else{                                                     // 如果月份不相等，推送第二个月份；
+       ymdStr1 = ymdArr1[1] + " " + ymdArr1[2] +', ' + ymdArr1[0];
+       arr.push(ymdStr1);    
+       ymdStr2 = ymdArr2[1] + " " + ymdArr2[2];
+       arr.push(ymdStr2);
+     }
+   }  
+ }
+  
+  //返回最终结果
+  return arr;                                                 
+}
+
+makeFriendlyDates(["2022-09-05", "2023-09-04"]);
