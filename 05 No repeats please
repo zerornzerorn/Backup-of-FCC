@@ -1,0 +1,81 @@
+function permAlone(str) {
+  
+  var ele1=[],ele2=[]; //ele1 存储所有的， 哪些字母重复，重复字母的数量。ele2 临时存储哪个字母重复，数量，并推送到ele1中去。
+  var num = 1;  //字母的个数，初值为1。
+  var val=0;    //最终结果
+  var length=str.length;//字符串长度
+  
+  var arr=str.split('');  //字符串分解为数组
+  
+  arr.sort();  //字母数组排序，便于统计。
+ 
+  str=arr.join('');
+  
+  //阶乘函数
+  function fac(n){
+    var multi=1;
+    while(n>0){
+      multi *= n;
+      n --;      
+    }
+    return multi;
+  }
+  
+
+  
+    for(var i = 0; i < arr.length-1; i ++){// 统计所有字母重复数量，哪些重复的功能块。
+      
+       if(arr[i]===arr[i+1]){
+       
+         ele2.push(arr[i]);
+      
+         while (arr[i]===arr[i+1]) {
+        
+           arr.splice(i,1);
+           num += 1;  
+         }
+         ele2.push(num);
+         num=1;
+         i--;
+         ele1.push(ele2);
+         ele2=[];         
+       }
+    }
+  
+  //计算所有重复字母的总数
+  num=0;
+ for(i = 0; i < ele1.length; i ++){
+    
+    num += ele1[i][1];    
+    
+  }
+  
+  //计算所有重复字母的可能排布
+  
+  var surplus=1;
+  
+  for(i = 0; i < ele1.length; i ++)
+    
+    surplus *= fac(ele1[i][1]);
+
+ // 计算所有排列可能性，用阶乘，并减去包含每个重复字母的排列
+  
+  val = fac(str.length);
+  
+  for(i = 0; i < ele1.length; i ++){
+    
+    val= val-fac(ele1[i][1])*fac(str.length-ele1[i][1]+1);    
+    
+  }
+  
+  // 如果重复字母大于一个，就存在多减的情况，把这个情况加回来。
+ if(ele1.length>1)
+  val = val+fac(arr.length)*surplus*(ele1.length-1);
+  
+  return val;
+    
+  
+}
+
+
+permAlone('abfdefa');
