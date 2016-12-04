@@ -1,0 +1,25 @@
+function pairwise(arr, arg) {
+  var result=0;
+  var index=0;
+  for(var i = 0; i < arr.length; i ++){
+    
+    if(arr[i]!==true){    
+      index=arr[i];    
+      arr.splice(i,1,true);    
+      if (arr.indexOf(arg-index)>=0){      
+        arr.splice(arr.indexOf(arg-index),1,true);                 
+      }
+      else  arr.splice(i,1,index);
+    }
+  }
+  
+ for( i = 0; i < arr.length; i ++){
+   
+   if(arr[i]===true)
+   
+   result += i;
+ }  
+  return result;
+}
+
+pairwise([1, 1, 1], 2) ;
